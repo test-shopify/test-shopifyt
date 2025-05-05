@@ -2,7 +2,7 @@
   .footer {
     margin-bottom: 85px !important;
   }
-  #add-cart-fixed-container {
+  .add-cart-fixed-container {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -14,7 +14,7 @@
     opacity: 0;
     transition: all 0.4s;
   }
-  #add-cart-fixed-container.show {
+  .add-cart-fixed-container.show {
     z-index: 9999;
     transform: translateY(0);
     opacity: 1;
@@ -83,26 +83,29 @@
     }
   }
 </style>
+{%- liquid
+  assign product_form_id = 'product-form-' | append: section.id
+  assign current_variant = product.selected_or_first_available_variant
+  assign price = current_variant.price
+  assign section_id = section.id
+  assign available = current_variant.available | default: false
+-%}
 
 <add-cart-fixed
-  id="add-cart-fixed-container"
+  class="add-cart-fixed-container"
+  id="add-cart-fixed-{{section_id}}"
 >
-  {%- liquid
-    assign product_form_id = 'product-form-' | append: section.id
-    assign current_variant = product.selected_or_first_available_variant
-    assign compare_at_price = current_variant.compare_at_price
-    assign price = current_variant.price
-    assign available = current_variant.available | default: false
-  -%}
   <div class="section-container">
     <div class="section-content">
       <div class="add-cart-contaienr">
-        <div class="add-cart-product-title">
+        <div class="add-cart-product-title" id="add-cart-product-{{section_id}}">
           {{ product.title }}
         </div>
         <div class="add-cart-product-info">
           <div class="add-cart-price-wrap">
-            <span class="add-cart-price">{{ price | money_without_trailing_zeros }}</span>
+            <span class="add-cart-price" id="add-cart-price-{{section_id}}">
+              {{- price | money_without_trailing_zeros -}}
+            </span>
             {% comment %}
               <span class="add-cart-at-price">
                 {{- compare_at_price | money_without_trailing_zeros -}}
@@ -117,7 +120,7 @@
             name="add"
             form="{{product_form_id}}"
             class="add-cart-btn button"
-            id="add-cart-btn-{{section.id}}"
+            id="add-cart-btn-{{section_id}}"
           >
             {%- if available -%}
               {{ 'products.product.add_to_cart' | t }}
