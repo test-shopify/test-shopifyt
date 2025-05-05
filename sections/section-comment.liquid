@@ -3,13 +3,32 @@
       padding-top:{{section.settings.padding_top}}px;
   }
   .star-default{
-    color: #fff;
+    color: #c7c7c7;
   }
   .star-active{
-    color: #00BA5F;
+    color: #ffe200;
   }
-
-  @media screen and (max-width: 768px) {
+  .comment-card-image{
+    /* object-fit: contain;
+    min-height: 280px; */
+  }
+  .comment--slide{
+    width: 520px;
+  }
+  .comment-card-score{
+    margin-top: 15px;
+  }
+  .comment-card-user-name{
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .comment-card-info{
+    padding: 10px;
+  }
+  @media screen and (max-width: 749px) {
+    .comment--slide{
+      width: 289px;
+    }
    .section-{{section.id}}{
       padding-top:{{section.settings.md_padding_top}}px;
    }
@@ -27,30 +46,32 @@
       <div class="swiper">
         <div class="swiper-wrapper">
           {% for item in section.blocks %}
-            <div class="swiper-slide">
+            <div class="swiper-slide comment--slide">
               <div class="comment-card">
-                <div class="comment-card-image">
-                  {% assign md_img = item.settings.md_img | default: item.settings.img %}
-                  {% render 'img-lazyload', image: item.settings.img, class: 'pc-media' %}
-                  {% render 'img-lazyload', image: md_img, class: 'mobile-media' %}
+                {% assign md_img = item.settings.md_img | default: item.settings.img %}
+                {% render 'img-lazyload', image: item.settings.img, class: 'pc-media comment-card-image' %}
+                {% render 'img-lazyload', image: md_img, class: 'mobile-media comment-card-image' %}
+                <div class="comment-card-info">
+                    <div class="comment-card-score">
+                        {% for i in (1..5) %}
+                          {% assign icon_class = 'star-default' %}
+                          {% if i <= item.settings.score %}
+                            {% assign icon_class = 'star-active' %}
+                          {% endif %}
+                          {% render 'star-icon', class: icon_class %}
+                        {% endfor %}
+                      </div>
+                      <div class="comment-card-user-name">
+                        {{ item.settings.user_name }}
+                      </div>
+                      <div class="comment-card-content">{{ item.settings.content }}</div>
                 </div>
-                <div class="comment-card-score">
-                  {% for i in (1..5) %}
-                    {% assign icon_class = 'star-default' %}
-                    {% if i <= item.settings.score %}
-                      {% assign icon_class = 'star-active' %}
-                    {% endif %}
-                    {% render 'star-icon', class: icon_class %}
-                  {% endfor %}
-                </div>
-                <div class="comment-card-user-name">
-                  {{ item.settings.user_name }}
-                </div>
-                <div class="comment-card-content">{{ item.settings.content }}</div>
+              
               </div>
             </div>
           {% endfor %}
         </div>
+        <div class="swiper-pagination"></div>
       </div>
     </div>
   </div>

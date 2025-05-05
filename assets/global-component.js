@@ -1,4 +1,35 @@
 (() => {
+      // 公共类可继承open属性
+      const GlobalHTMLElement = class extends HTMLElement {
+        static get observedAttributes() {
+            return ["open"];
+        }
+        constructor() {
+            super();
+        }
+        get open() {
+            return this.hasAttribute("open");
+        }
+        set open(value) {
+            if (value) {
+                (async () => {
+                    this.setAttribute("open", "");
+                })();
+            } else {
+                this.removeAttribute("open");
+            }
+        }
+        listenerKeydown() {
+            document.addEventListener("keydown", (e) => {
+                if (
+                    this.open == true &&
+                    e.code == "Escape"
+                ) {
+                    this.open = false;
+                }
+            });
+        }
+    }
     customElements.define("add-cart-fixed", class AddCartFixed extends HTMLElement {
         constructor() {
             super()
@@ -19,6 +50,7 @@
             intersection.observe(productForm)
         }
     })
+   
 
     customElements.define(
         "swiper-container",

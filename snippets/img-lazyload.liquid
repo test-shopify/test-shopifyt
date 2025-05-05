@@ -18,12 +18,12 @@
         alt="{{image_alt}}"
         height="{{image_height}}"
         style="{{style}}"
-        width="{{ image_width }}"
+        width="auto"
         loading="eager"
         class="{{class}}"
       >
     {% else %}
-      <image-lazy>
+      <image-lazy style="display: contents;">
         <img
           src="{{t_src}}"
           data-src="{{src}}"
@@ -32,7 +32,7 @@
             height="{{image_height}}"
           {% endif %}
           style="{{style}}"
-          width="{{ image_width }}"
+          width="auto"
           loading="lazy"
           class="lazyload img--lazyload {{class}}"
           {% if media_id %}

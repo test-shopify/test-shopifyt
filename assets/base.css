@@ -2933,8 +2933,12 @@ details-disclosure > details {
 .section-container{
  padding: 0 20px;
 }
-swiper-container{
+image-lazy{
   display: contents;
+}
+.img--lazyload{
+  max-width: 100%;
+  width: 100%;
 }
 
 .section-content{
@@ -2948,6 +2952,9 @@ swiper-container{
 
 .mobile-media{
   display: none;
+}
+:root{
+  --swiper-pagination-color: #000;
 }
 
 @media screen and (max-width: 749px) {
