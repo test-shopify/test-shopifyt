@@ -126,11 +126,17 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "section_add_cart_CDKPMw": {
+      "type": "section-add-cart",
+      "name": "section-add-cart",
+      "settings": {}
     }
   },
   "order": [
     "main",
     "related-products",
-    "featured_collection_kCRCfU"
+    "featured_collection_kCRCfU",
+    "section_add_cart_CDKPMw"
   ]
 }
