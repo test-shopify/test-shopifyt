@@ -2933,14 +2933,31 @@ details-disclosure > details {
 .section-container{
  padding: 0 20px;
 }
+swiper-container{
+  display: contents;
+}
 
 .section-content{
   margin: 0 auto;
   max-width: var(--page-width);
 }
 
+.pc-media{
+  display: block;
+}
+
+.mobile-media{
+  display: none;
+}
 
 @media screen and (max-width: 749px) {
+  .pc-media{
+    display: none;
+  }
+  
+  .mobile-media{
+    display: block;
+  }
   .content-container--full-width-mobile {
     border-left: none;
     border-right: none;

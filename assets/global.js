@@ -934,6 +934,8 @@ class VariantSelects extends HTMLElement {
         const inventorySource = html.getElementById(`Inventory-${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section}`);
         const inventoryDestination = document.getElementById(`Inventory-${this.dataset.section}`);
 
+        console.log('this.dataset.section',this.dataset.section)
+
         if (source && destination) destination.innerHTML = source.innerHTML;
         if (inventorySource && inventoryDestination) inventoryDestination.innerHTML = inventorySource.innerHTML;
         if (skuSource && skuDestination) {

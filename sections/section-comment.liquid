@@ -1,0 +1,119 @@
+<style>
+  .section-{{section.id}}{
+      padding-top:{{section.settings.padding_top}}px;
+  }
+  .star-default{
+    color: #fff;
+  }
+  .star-active{
+    color: #00BA5F;
+  }
+
+  @media screen and (max-width: 768px) {
+   .section-{{section.id}}{
+      padding-top:{{section.settings.md_padding_top}}px;
+   }
+  }
+</style>
+
+<swiper-container
+  open
+  data-slides-per-view="1.2"
+  data-space-between="16"
+  data-breakpoints='{"768":{"slidesPerView":2.2,"spaceBetween":16},"1000":{"slidesPerView":3,"spaceBetween":20}}'
+>
+  <div class="section-container section-{{section.id}}">
+    <div class="section-content">
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          {% for item in section.blocks %}
+            <div class="swiper-slide">
+              <div class="comment-card">
+                <div class="comment-card-image">
+                  {% assign md_img = item.settings.md_img | default: item.settings.img %}
+                  {% render 'img-lazyload', image: item.settings.img, class: 'pc-media' %}
+                  {% render 'img-lazyload', image: md_img, class: 'mobile-media' %}
+                </div>
+                <div class="comment-card-score">
+                  {% for i in (1..5) %}
+                    {% assign icon_class = 'star-default' %}
+                    {% if i <= item.settings.score %}
+                      {% assign icon_class = 'star-active' %}
+                    {% endif %}
+                    {% render 'star-icon', class: icon_class %}
+                  {% endfor %}
+                </div>
+                <div class="comment-card-user-name">
+                  {{ item.settings.user_name }}
+                </div>
+                <div class="comment-card-content">{{ item.settings.content }}</div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</swiper-container>
+
+{% schema %}
+{
+  "name": "section-comment",
+  "settings": [
+    {
+      "type": "number",
+      "id": "padding_top",
+      "default": 120,
+      "label": "pc模块上内边距"
+    },
+    {
+      "type": "number",
+      "id": "md_padding_top",
+      "default": 60,
+      "label": "移动模块上内边距"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "评论block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "img",
+          "label": "pc配图"
+        },
+        {
+          "type": "image_picker",
+          "id": "md_img",
+          "label": "移动配图"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "user_name",
+          "label": "用户名"
+        },
+        {
+          "type": "range",
+          "id": "score",
+          "label": "评分",
+          "default": 5,
+          "min": 1,
+          "max": 5,
+          "step": 1
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "评分内容"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "section-comment"
+    }
+  ]
+}
+{% endschema %}

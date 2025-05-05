@@ -1,0 +1,46 @@
+{% # theme-check-disable %}
+{% if image %}
+    {%- liquid
+      assign image_height = height
+      assign image_width = width | default: image.width
+      assign image_alt = alt | default: image.alt
+      assign src = image | image_url: width: image_width
+      assign t_width = load_width | default: 30
+      assign t_src = image | image_url: width: t_width
+      unless src
+        assign src = image
+        assign t_src = image
+      endunless
+    -%}
+    {% if is_load == true %}
+      <img
+        src="{{src}}"
+        alt="{{image_alt}}"
+        height="{{image_height}}"
+        style="{{style}}"
+        width="{{ image_width }}"
+        loading="eager"
+        class="{{class}}"
+      >
+    {% else %}
+      <image-lazy>
+        <img
+          src="{{t_src}}"
+          data-src="{{src}}"
+          alt="{{image_alt}}"
+          {% if image_height != blank %}
+            height="{{image_height}}"
+          {% endif %}
+          style="{{style}}"
+          width="{{ image_width }}"
+          loading="lazy"
+          class="lazyload img--lazyload {{class}}"
+          {% if media_id %}
+            data-media-id="{{media_id}}"
+          {% endif %}
+        >
+      </image-lazy>
+    {% endif %}
+  
+  {% endif %}
+  

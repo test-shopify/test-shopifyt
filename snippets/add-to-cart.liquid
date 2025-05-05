@@ -1,0 +1,132 @@
+<style>
+  .footer {
+    margin-bottom: 85px !important;
+  }
+  #add-cart-fixed-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-top: 1px solid #ededed;
+    z-index: -1;
+    background-color: #fff;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: all 0.4s;
+  }
+  #add-cart-fixed-container.show {
+    z-index: 9999;
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .add-cart-contaienr {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    color: #000;
+  }
+  .add-cart-product-info {
+    display: flex;
+    column-gap: 20px;
+    align-items: center;
+  }
+  .add-cart-price-wrap {
+  }
+  .add-cart-product-title {
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 1.1;
+    /* flex: 2 0 0; */
+  }
+  .add-cart-price {
+    font-size: 20px;
+  }
+  .add-cart-product-info {
+    /* flex: 1 0 0; */
+  }
+  .add-cart-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    padding: 10px 20px;
+    background-color: #000;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .add-cart-button:hover {
+    opacity: 0.8;
+  }
+
+  @media screen and (max-width: 768px) {
+    .add-cart-contaienr {
+      flex-direction: column;
+    }
+    .add-cart-product-title {
+    }
+    .add-cart-product-info {
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+      margin-top: 10px;
+      row-gap: 10px;
+    }
+    .add-cart-button {
+      width: 100%;
+    }
+    .footer {
+      margin-bottom: 200px !important;
+    }
+  }
+</style>
+
+<add-cart-fixed
+  id="add-cart-fixed-container"
+>
+  {%- liquid
+    assign product_form_id = 'product-form-' | append: section.id
+    assign current_variant = product.selected_or_first_available_variant
+    assign compare_at_price = current_variant.compare_at_price
+    assign price = current_variant.price
+    assign available = current_variant.available | default: false
+  -%}
+  <div class="section-container">
+    <div class="section-content">
+      <div class="add-cart-contaienr">
+        <div class="add-cart-product-title">
+          {{ product.title }}
+        </div>
+        <div class="add-cart-product-info">
+          <div class="add-cart-price-wrap">
+            <span class="add-cart-price">{{ price | money_without_trailing_zeros }}</span>
+            {% comment %}
+              <span class="add-cart-at-price">
+                {{- compare_at_price | money_without_trailing_zeros -}}
+              </span>
+            {% endcomment %}
+          </div>
+          <button
+            {% if available == false %}
+              disabled="disabled"
+            {% endif %}
+            type="submit"
+            name="add"
+            form="{{product_form_id}}"
+            class="add-cart-btn button"
+            id="add-cart-btn-{{section.id}}"
+          >
+            {%- if available -%}
+              {{ 'products.product.add_to_cart' | t }}
+            {%- else -%}
+              {{ 'products.product.sold_out' | t }}
+            {%- endif -%}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</add-cart-fixed>
