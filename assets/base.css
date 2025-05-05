@@ -2930,6 +2930,16 @@ details-disclosure > details {
   border-radius: 0;
 }
 
+.section-container{
+ padding: 0 20px;
+}
+
+.section-content{
+  margin: 0 auto;
+  max-width: var(--page-width);
+}
+
+
 @media screen and (max-width: 749px) {
   .content-container--full-width-mobile {
     border-left: none;

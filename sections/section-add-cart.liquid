@@ -1,0 +1,78 @@
+<style>
+  . {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+  .add-cart-contaienr{
+    display: flex;
+    align-items: center;
+  }
+  .add-cart-product-info{
+    display: flex;
+    column-gap: 20px;
+  }
+  .add-cart-price-wrap{
+    
+  }
+</style>
+
+<add-cart-fixed
+  data-id="{{section.id}}"
+>
+  {%- liquid
+    assign product_form_id = 'product-form-' | append: section.id
+    assign current_variant = product.selected_or_first_available_variant
+    assign compare_at_price = current_variant.compare_at_price
+    assign price = current_variant.price
+    assign available = current_variant.available | default: false
+    assign money_price = price | money
+  -%}
+  <div class="section-container">
+    <div class="section-content">
+      <div class="add-cart-contaienr">
+        <div class="add-cart-product-title">
+          {% if current_variant.featured_image %}
+            {{ current_variant.title }}
+          {% else %}
+            {{ product.title }}
+          {% endif %}
+        </div>
+        <div class="add-cart-product-info">
+          <div class="add-cart-price-wrap">
+            <span class="add-cart-price">{{ price | money_without_trailing_zeros }}</span>
+            <span class="add-cart-at-price">
+              {{- compare_at_price | money_without_trailing_zeros -}}
+            </span>
+          </div>
+          <add-cart-button
+            class=""
+            data-variant-id="{{product.first_available_variant.id}}"
+            {% unless current_variant.available %}
+              disabled
+            {% endunless %}
+          >
+            {% if current_variant.available %}
+              {{ "products.product.add_to_cart" | t }}
+            {% else %}
+              {{ 'products.product.sold_out' | t }}
+            {% endif %}
+          </add-cart-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</add-cart-fixed>
+
+{% schema %}
+{
+  "name": "加入购物车",
+  "enabled_on": { "templates": ["product"] },
+  "presets": [
+    {
+      "name": "section-add-cart"
+    }
+  ]
+}
+{% endschema %}
