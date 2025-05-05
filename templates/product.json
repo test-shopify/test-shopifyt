@@ -135,8 +135,8 @@
           "settings": {
             "img": "shopify://shop_images/Main_d624f226-0a89-4fe1-b333-0d1548b43c06.jpg",
             "user_name": "test user",
-            "score": 2,
-            "content": "<p>test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment </p>"
+            "score": 1,
+            "content": "<p>test comment test comment </p>"
           }
         },
         "item_BJPG8L": {
@@ -145,7 +145,7 @@
             "img": "shopify://shop_images/Main_d624f226-0a89-4fe1-b333-0d1548b43c06.jpg",
             "user_name": "test user",
             "score": 2,
-            "content": "<p>test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment </p>"
+            "content": "<p>test comment test comment </p>"
           }
         },
         "item_bMWayg": {
@@ -153,8 +153,8 @@
           "settings": {
             "img": "shopify://shop_images/Main_d624f226-0a89-4fe1-b333-0d1548b43c06.jpg",
             "user_name": "test user",
-            "score": 2,
-            "content": "<p>test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment </p>"
+            "score": 3,
+            "content": "<p>test comment test comment </p>"
           }
         },
         "item_XiN8e4": {
@@ -162,8 +162,17 @@
           "settings": {
             "img": "shopify://shop_images/Main_d624f226-0a89-4fe1-b333-0d1548b43c06.jpg",
             "user_name": "test user",
-            "score": 2,
-            "content": "<p>test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment test comment </p>"
+            "score": 4,
+            "content": "<p>test comment test comment </p>"
+          }
+        },
+        "item_qtAbkj": {
+          "type": "item",
+          "settings": {
+            "img": "shopify://shop_images/Main_d624f226-0a89-4fe1-b333-0d1548b43c06.jpg",
+            "user_name": "test user",
+            "score": 5,
+            "content": "<p>test comment test comment </p>"
           }
         }
       },
@@ -171,7 +180,8 @@
         "item_N3G3qj",
         "item_BJPG8L",
         "item_bMWayg",
-        "item_XiN8e4"
+        "item_XiN8e4",
+        "item_qtAbkj"
       ],
       "name": "section-comment",
       "settings": {

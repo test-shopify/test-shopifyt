@@ -1,6 +1,6 @@
 (() => {
-    // 公共类可继承open属性
-    const GlobalHTMLElement = class extends HTMLElement {
+      // 公共类可继承open属性
+      const GlobalHTMLElement = class extends HTMLElement {
         static get observedAttributes() {
             return ["open"];
         }
@@ -50,7 +50,7 @@
             intersection.observe(productForm)
         }
     })
-
+   
 
     customElements.define(
         "swiper-container",
